@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col items-center justify-center">
-      <NuxtPage @send-answers="saveAnswers" @end-quiz="showResults"/>
+      <NuxtPage @send-answers="saveAnswers" @end-quiz="showResults"/>=
     </div>
 </template>
 
@@ -12,15 +12,13 @@ const saveAnswers = (answer) => {
   answers.value.push(answer)
 }
 
-const showResults = (isEnd) => {
-  if(isEnd) {
+const showResults = (quizName) => {
     navigateTo({
-      path: '/quiz/results',
+      path: `/${quizName}/results`,
       query: {
         answers: answers.value
       }
     })
-  }
 }
 
 

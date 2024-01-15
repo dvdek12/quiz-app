@@ -17,26 +17,28 @@
             <button>Powtórz</button>
 
             <button>Następny quiz</button>
+
         </nav>
     </div>
 </template>
 
 <script setup>
-const quiz = await useQuiz()
-const { query } = useRoute()
+import { getData } from 'nuxt-storage/local-storage';
 
+const { params } = useRoute()
+const quiz = await useQuizByName(params.quiz)
+
+const answers = computed(() => getData('answers'))
 const score = useState('score', () => 0)
-
 const scoreWithPercentages = computed(() => (score.value / quizLength.value).toFixed(2) * 100)
 
-const quizLength = computed(() => quiz.value.length)
+const quizLength = computed(() => quiz.value[0].questions.length)
 
-const answers = computed(() => query.answers)
 
 const correctAnswers = computed(() => {
     let result = []
 
-    quiz.value.forEach(el => {
+    quiz.value[0].questions.forEach(el => {
         el.answers.forEach(a => {
             if(a.correct){
                 result.push(a.content)
@@ -47,7 +49,7 @@ const correctAnswers = computed(() => {
     return result
 })
 
-// funkcja, która porownuje wartosci z dwoch tablic
+
 const getScore = () => {
     score.value = 0
     answers.value.forEach((answer, index) => {
@@ -59,7 +61,9 @@ const getScore = () => {
     })
 }
 
-onMounted(() => getScore())
+onMounted(() => {
+    getScore()
+})
 
 definePageMeta({
   layout: 'quiz'

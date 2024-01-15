@@ -13,7 +13,7 @@
                 Kategoria: <span>{{ quiz.category }}</span>
             </h5>
 
-            <button class="bg-blue-600 self-start py-1 px-6 rounded-lg font-semibold text-white shadow-2xl">
+            <button @click="startQuiz()" class="bg-blue-600 self-start py-1 px-6 rounded-lg font-semibold text-white shadow-2xl">
                 ZRÓB
             </button>
         </div>
@@ -23,8 +23,15 @@
 </template>
 
 <script setup>
-
+import { setData } from 'nuxt-storage/local-storage';
 const quiz = computed(() => props.quiz)
+const firstQuestion = computed(() => quiz.value.questions[0].question)
+
+const startQuiz = () => {
+    setData('answers', [])
+    navigateTo({ path: `/${quiz.value.quizName}/${firstQuestion.value}` })
+    
+}
 
 const props = defineProps({
     quiz: Object

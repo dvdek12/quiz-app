@@ -19,6 +19,7 @@
   "dependencies": {
     "@nuxtjs/supabase": "^1.1.5",
     "@nuxtjs/tailwindcss": "^6.10.3",
-    "@prisma/client": "^5.7.1"
+    "@prisma/client": "^5.7.1",
+    "nuxt-storage": "^1.2.2"
   }
 }

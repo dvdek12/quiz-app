@@ -23,11 +23,11 @@
                 </button>
             </div>
 
-            <button v-if="(questionIndex + 1) === quizLength" @click="showResults()"  class="bg-blue-400 mt-6">
+            <button v-if="(questionIndex + 1) === quizLength" @click="showResults()"  class="bg-blue-400 mt-6 text-white py-3 text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
                 ZAKOŃCZ
             </button>
 
-            <button v-else @click="goToNextQuestion()"  class="bg-blue-400 mt-6">
+            <button v-else @click="goToNextQuestion()"  class="bg-blue-400 mt-6 text-white py-3 text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
                 DALEJ
             </button>
         </div>
@@ -37,24 +37,26 @@
 </template>
 
 <script setup>
-const quiz = await useQuiz()
 const { params } = useRoute()
-const emit = defineEmits(['sendAnswers', 'endQuiz'])
-const quizLength = computed(() => quiz.value.length)
+import { setData, getData } from 'nuxt-storage/local-storage';
+const quizzes = await useQuizzes()
+const quiz = computed(() => quizzes.value.find(q => q.quizName === params.quiz))
+
+const quizLength = computed(() => quiz.value.questions.length)
 const checkedAnswer = ref("")
 const animateShake = ref(false)
 
-const question = computed(() => quiz.value.find(q => q.question == params.question + '?'))
+const question = computed(() => quiz.value.questions.find(q => q.question == params.question + '?'))
 
 const questionImg = computed(() => `url(${question.value.img})`)
 
-const questionIndex = computed(() => quiz.value.findIndex(q => q.question == params.question + '?'))
+const questionIndex = computed(() => quiz.value.questions.findIndex(q => q.question == params.question + '?'))
 
 const nextQuestion = computed(() => {
     if (questionIndex.value + 1 >= quizLength.value) {
-        return quiz.value[questionIndex.value]
+        return quiz.value.questions[questionIndex.value]
     } else {
-        return quiz.value[questionIndex.value + 1]
+        return quiz.value.questions[questionIndex.value + 1]
     }
 })
 
@@ -76,15 +78,30 @@ const goToNextQuestion = () => {
             animateShake.value = false
         }, 1500)
     }else{
-        emit('sendAnswers', checkedAnswer.value)
-        navigateTo(`/quiz/${nextQuestion.value.question}`)
+        saveAnswerInStorage()
+
+        navigateTo({ path: `/${quiz.value.quizName}/${nextQuestion.value.question}` })
     }
 }
 
-const showResults = () => {
-    emit('sendAnswers', checkedAnswer.value)
-    emit('endQuiz', true)
+const saveAnswerInStorage = () => {
+    const currentAnswers = ref(getData('answers'))
+
+    currentAnswers.value.push(checkedAnswer.value)
+
+    setData('answers', currentAnswers.value)
+    
 }
+
+const showResults = () => {
+    saveAnswerInStorage()
+
+    navigateTo({ path: `/${quiz.value.quizName}/results` })
+}
+
+definePageMeta({
+  layout: 'quiz'
+})
 
 </script>
 
