@@ -72,6 +72,79 @@ const data = {
                     ]
                 }
             ]
+        },
+        {
+            quizName: 'Stasiubizm',
+            category: 'ideologia',
+            img: "https://imgs.search.brave.com/0ooK165HGuVvJdsqwBmO7OczoCj_sQUSR2Ysuf9wGJA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS1jbGRucnkucy1u/YmNuZXdzLmNvbS9p/bWFnZS91cGxvYWQv/dF9maXQtNzYwdyxm/X2F1dG8scV9hdXRv/OmJlc3QvbmV3c2Nt/cy8yMDE3XzA2LzE4/OTQ0MDEvMTcwMjA3/LWFsaWVucy1yaGst/MTY0NnAuanBn",
+            questions: [
+                {
+                    question: 'Jaka jest najwazniejsza zasada Bubizmu?',
+                    img: "https://imgs.search.brave.com/LAHSvazLdXOI1MHSclK_yBXyoUJfgpBZhblUhlrYTWU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/ODkxNDA5MTU3MDgt/MjBmZjU4NmZlNzY3/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4Tm54OGQy/VmxaSHhsYm53d2ZI/d3dmSHg4TUE9PQ",
+                    answers: [
+                        {
+                            correct: false,
+                            content: 'Buszek'
+                        },
+                        {
+                            correct: false,
+                            content: 'Nauka'
+                        },
+                        {
+                            correct: false,
+                            content: 'Dziewczynki'
+                        },
+                        {
+                            correct: true,
+                            content: 'Dziewczynki i Buszek <3'
+                        }
+                    ]
+                },
+                {
+                    question: 'Co najbardziej lubi Stasiu?',
+                    img: "https://imgs.search.brave.com/CwDA9qzvPw4fEwl29JQ-KFA-Y0GAfaTF2pBwrla7tkw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9qb3lmdWwtYWZy/aWNhbi1hbWVyaWNh/bi1odXNiYW5kLWh1/Z2dpbmctd2lmZS1z/dGFuZGluZy1ob21l/XzExNjU0Ny0yODI2/Ni5qcGc_c2l6ZT02/MjYmZXh0PWpwZw",
+                    answers: [
+                        {
+                            correct: false,
+                            content: 'Matma'
+                        },
+                        {
+                            correct: false,
+                            content: 'Fizyka'
+                        },
+                        {
+                            correct: false,
+                            content: 'Agnieszka Wojno'
+                        },
+                        {
+                            correct: true,
+                            content: 'Klaudynka <3'
+                        }
+                    ]
+                },
+                {
+                    question: 'Czy uwazasz ze Stasiubizm to jedyna prawidlowa religia i wiara?',
+                    img: "https://imgs.search.brave.com/cJMHBprcssD3a6pQc5ircgjwde-18IJflHUQgcWgx-c/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS83MDg0MzMw/OC82MDQ2OS9pLzQ1/MC9kZXBvc2l0cGhv/dG9zXzYwNDY5NzQ1/MC1zdG9jay1waG90/by1zbm9vcC1kb2dn/LWFycml2ZXMtMjAy/Mi1tdHYuanBn",
+                    answers: [
+                        {
+                            correct: false,
+                            content: 'TAK'
+                        },
+                        {
+                            correct: false,
+                            content: 'NIE'
+                        },
+                        {
+                            correct: false,
+                            content: 'JEBAC POLICJE'
+                        },
+                        {
+                            correct: true,
+                            content: 'zajarałbym bucha'
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
