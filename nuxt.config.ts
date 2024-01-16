@@ -9,7 +9,8 @@ export default defineNuxtConfig({
 
   googleFonts: {
     families: {
-      Salsa: [400]
+      Salsa: [400],
+      Chivo: [400]
     }
   }
 })
