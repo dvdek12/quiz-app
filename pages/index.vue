@@ -16,5 +16,9 @@ definePageMeta({
   layout: 'quiz'
 })
 
+useHead({
+    title: 'Quiz'
+})
+
 
 </script>

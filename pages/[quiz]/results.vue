@@ -59,13 +59,14 @@
                 </span>
             </button>
 
-            <button class="inline-flex items-center space-x-2 bg-green-400 px-4 py-2 rounded-md">
-                <Icon name="icon-park-solid:next" color="white" size="16" />
-                <span class="text-white  text-md">
-                    Następny quiz
-                </span>
-            </button>
-
+            <NuxtLink :to="`/${nextQuiz.quizName}/${nextQuiz.questions[0].question}`">
+                <button class="inline-flex items-center space-x-2 bg-green-400 px-4 py-2 rounded-md">
+                    <Icon name="icon-park-solid:next" color="white" size="16" />
+                    <span class="text-white  text-md">
+                        Następny quiz
+                    </span>
+                </button>
+            </NuxtLink>
         </nav>
     </div>
 </template>
@@ -79,7 +80,13 @@ const quizzes = await useQuizzes()
 
 const quiz = computed(() => quizzes.value.find(q => q.quizName === params.quiz))
 const quizLength = computed(() => quiz.value.questions.length)
-
+const nextQuiz = computed(() => {
+    let nextIndex = quizzes.value.findIndex(q => q.quizName === quiz.value.quizName) + 1
+    if(nextIndex >= quizzes.value.length){
+        nextIndex = 0
+    }
+    return quizzes.value[nextIndex]
+})
 
 const answers = computed(() => getData('answers'))
 
@@ -122,6 +129,10 @@ onMounted(() => {
 
 definePageMeta({
     layout: 'quiz'
+})
+
+useHead({
+    title: `${quiz.value.quizName} - wyniki`
 })
 
 </script>

@@ -18,6 +18,7 @@
                     v-for="answer in question.answers" :key="answer" 
                     class="bg-gray-200 hover:bg-gray-300 text-2xl transition-all duration-300 ease-in-out rounded-lg p-7 text-center border-4"
                     :class="{ shakeAnimation : animateShake }"
+                    :disabled="isDisabled && answer.content !== checkedAnswer"
                     >
                     {{ answer.content }}
                 </button>
@@ -45,6 +46,7 @@ const quiz = computed(() => quizzes.value.find(q => q.quizName === params.quiz))
 const quizLength = computed(() => quiz.value.questions.length)
 const checkedAnswer = ref("")
 const animateShake = ref(false)
+const isDisabled = ref(false)
 
 const question = computed(() => quiz.value.questions.find(q => q.question == params.question + '?'))
 
@@ -61,10 +63,12 @@ const nextQuestion = computed(() => {
 })
 
 const checkAnswer = (event) => {
-    if(event.target.classList.contains('border-gray-500')){
-        event.target.classList.remove('border-gray-500')
+    if(event.target.classList.contains('border-gray-800')){
+        isDisabled.value = !isDisabled.value
+        event.target.classList.remove('border-gray-800')
     }else{
-        event.target.classList.add('border-gray-500')
+        event.target.classList.add('border-gray-800')
+        isDisabled.value = !isDisabled.value
     }
     
     checkedAnswer.value = event.target.innerText
@@ -94,13 +98,32 @@ const saveAnswerInStorage = () => {
 }
 
 const showResults = () => {
-    saveAnswerInStorage()
+    if(checkedAnswer.value === ""){
+        animateShake.value = true
 
-    navigateTo({ path: `/${quiz.value.quizName}/results` })
+        setTimeout(() => {
+            animateShake.value = false
+        }, 1500)
+    }else{
+        saveAnswerInStorage()
+
+        navigateTo({ path: `/${quiz.value.quizName}/results` })
+    }
 }
+
+onMounted(() => {
+    if((params.question + "?") === quiz.value.questions[0].question){
+        console.log("first quiestion!");
+        setData('answers', [])
+    }
+})
 
 definePageMeta({
   layout: 'quiz'
+})
+
+useHead({
+    title: `${quiz.value.quizName} - ${question.value.question}`
 })
 
 </script>
