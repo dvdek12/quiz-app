@@ -3,11 +3,17 @@
 
         <div class="flex flex-col space-y-4 items-center">
             <div class="">
-                <img :src="successIcon" alt="goodjobgif" class="w-24 h-24">
+                <img v-if="score > 1" :src="successIcon" alt="goodjobgif" class="w-24 h-24">
+                <img v-else :src="sadIcon" alt="sadIcon" class="w-24 h-24">
             </div>
-            <h2 class="text-5xl chivo font-semibold text-gray-800">
+
+            <h2 v-if="score > 1"  class="text-5xl chivo font-semibold text-gray-800">
                 Gratulacje!
             </h2>
+            <h2 v-else class="text-5xl chivo font-semibold text-gray-800">
+                Następnym razem będzie lepiej!
+            </h2>
+
             <div class="flex flex-col space-y-2">
                 <div>
                     <span class="text-xl chivo text-gray-700">
@@ -52,12 +58,14 @@
                 </button>
             </NuxtLink>
 
-            <button class="inline-flex items-center space-x-2 bg-indigo-400 px-4 py-2 rounded-md">
+            <NuxtLink :to="`/${quiz.quizName}/answers`">
+                <button class="inline-flex items-center space-x-2 bg-indigo-400 px-4 py-2 rounded-md">
                 <Icon name="lets-icons:chart-fill" color="white" size="16" />
                 <span class="text-white  text-md">
                     Odpowiedzi
                 </span>
             </button>
+            </NuxtLink>
 
             <NuxtLink :to="`/${nextQuiz.quizName}/${nextQuiz.questions[0].question}`">
                 <button class="inline-flex items-center space-x-2 bg-green-400 px-4 py-2 rounded-md">
@@ -74,7 +82,8 @@
 <script setup>
 import { getData } from 'nuxt-storage/local-storage';
 import successIcon from '~/assets/success.png'
-console.log(successIcon);
+import sadIcon from '~/assets/sad.png'
+
 const { params } = useRoute()
 const quizzes = await useQuizzes()
 
