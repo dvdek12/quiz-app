@@ -12,15 +12,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(q, index) in quiz.questions" :key="q" class="text-lg font-semibold text-gray-400 hover:text-blue-600 ">
+                    <tr v-for="(q, index) in tableData" :key="q" class="text-lg font-semibold text-gray-400 hover:text-blue-600 ">
                         <td class="px-6">
                             {{ index + 1 }} 
                         </td>
                         <td class="px-6   "> {{ q.question }} </td>
-                        <td class="px-6"> 1914 </td>
-                        <td class="px-6"> 1814 </td>
+                        <td class="px-6"> {{ q.userAnswer }} </td>
+                        <td class="px-6"> {{ q.answers.find(q => q.correct).content }} </td>
                     </tr>
                 </tbody>
+                
             </table>
         </div>
 
@@ -28,9 +29,26 @@
 </template>
 
 <script setup>
+import { getData } from 'nuxt-storage/local-storage';
 const { params } = useRoute()
-
 const quiz = await useQuizByName(params.quiz)
+
+const answers = computed(() => getData('answers'))
+
+const tableData = computed(() => {
+    const result = []
+    quiz.value.questions.forEach((q, index) => {
+        const tmp = { ...q, userAnswer: answers.value[index]}
+        result.push(tmp)
+    })
+    return result
+})
+
+
+
+console.log(quiz.value);
+console.log(tableData.value);
+
 
 definePageMeta({
     layout: 'quiz',
