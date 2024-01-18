@@ -38,12 +38,14 @@
 </template>
 
 <script setup>
-const { params } = useRoute()
 import { setData, getData } from 'nuxt-storage/local-storage';
-const quizzes = await useQuizzes()
-const quiz = computed(() => quizzes.value.find(q => q.quizName === params.quiz))
+
+const { params } = useRoute()
+const quiz = await useQuizByName(params.quiz)
+
 
 const quizLength = computed(() => quiz.value.questions.length)
+
 const checkedAnswer = ref("")
 const animateShake = ref(false)
 const isDisabled = ref(false)
@@ -106,14 +108,13 @@ const showResults = () => {
         }, 1500)
     }else{
         saveAnswerInStorage()
-
+        setData('endQuiz', true)
         navigateTo({ path: `/${quiz.value.quizName}/results` })
     }
 }
 
 onMounted(() => {
     if((params.question + "?") === quiz.value.questions[0].question){
-        console.log("first quiestion!");
         setData('answers', [])
     }
 })
