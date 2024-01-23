@@ -2,7 +2,7 @@
     <div :class="classes">
         <div v-for="unit in parseInt(max)" :key="unit">
             
-            <div class="h-full" :class="{ 'bg-green-400' : unit <= props.current }">
+            <div class="h-1/2 lg:h-full" :class="{ 'bg-green-400' : unit <= props.current }">
                 
             </div>
 

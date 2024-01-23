@@ -1,22 +1,22 @@
 <template>
-    <div class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-24 space-y-16">
+    <div class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-20 lg:py-24 space-y-16 lg:px-0 px-6">
 
         <div class="flex flex-col space-y-4 items-center">
             <div class="">
-                <img v-if="score > 1" :src="successIcon" alt="goodjobgif" class="w-24 h-24">
+                <img v-if="score > 1" :src="successIcon" alt="goodjobgif" class="w-16 h-16 lg:w-24 lg:h-24">
                 <img v-else :src="sadIcon" alt="sadIcon" class="w-24 h-24">
             </div>
 
-            <h2 v-if="score > 1"  class="text-5xl chivo font-semibold text-gray-800">
+            <h2 v-if="score > 1"  class="text-3xl lg:text-5xl chivo font-semibold text-gray-800">
                 Gratulacje!
             </h2>
             <h2 v-else class="text-5xl chivo font-semibold text-gray-800">
                 Następnym razem będzie lepiej!
             </h2>
 
-            <div class="flex flex-col space-y-2">
+            <div class="flex flex-col space-y-2 ">
                 <div>
-                    <span class="text-xl chivo text-gray-700">
+                    <span class="text-md lg:text-xl chivo text-gray-700">
                         Udało ci się skończyc quiz z wynikiem {{ score }}/{{ quizLength }}
                     </span>
                 </div>

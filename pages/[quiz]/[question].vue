@@ -1,22 +1,24 @@
 <template>
-    <div class="relative flex flex-col items-center bg-center bg-cover  w-full shadow-2xl filter " >
+    <div class="relative flex flex-col items-center bg-center bg-cover w-full shadow-2xl filter " >
         <div class="flex flex-col space-y-3 w-full items-center  relative">
             <QuizProgressLine :current="questionIndex + 1" :max="quizLength" />
-            <span class="font-bold uppercase text-white text-2xl">
+            <span class="font-bold uppercase text-white text-lg lg:text-2xl">
                 {{ questionIndex + 1 }} / {{ quizLength }}
             </span>
         </div>
         <div class="flex flex-col justify-center py-12  w-3/4 relative">
 
 
-            <p class="text-5xl salsa mb-6 text-center text-white">
+            <p class="text-3xl lg:text-5xl salsa mb-6 text-center text-white">
                 {{ question.question }}
             </p>
 
-            <div class="grid grid-cols-2 grid-rows-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-1 sm:grid-rows-2 gap-4">
                 <button @click="checkAnswer($event)" 
                     v-for="answer in question.answers" :key="answer" 
-                    class="bg-gray-200 hover:bg-gray-300 text-2xl transition-all duration-300 ease-in-out rounded-lg p-7 text-center border-4"
+                    class="bg-gray-200 hover:bg-gray-300 text-md sm:text-lg lg:text-2xl 
+                    transition-all duration-100 ease-in-out  p-3 sm:p-4 lg:p-7 text-center border-4
+                    "
                     :class="{ shakeAnimation : animateShake }"
                     :disabled="isDisabled && answer.content !== checkedAnswer"
                     >
@@ -24,11 +26,11 @@
                 </button>
             </div>
 
-            <button v-if="(questionIndex + 1) === quizLength" @click="showResults()"  class="bg-blue-400 mt-6 text-white py-3 text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
+            <button v-if="(questionIndex + 1) === quizLength" @click="showResults()"  class="bg-blue-400 mt-6 text-white py-2 lg:py-3 text-md lg:text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
                 ZAKOŃCZ
             </button>
 
-            <button v-else @click="goToNextQuestion()"  class="bg-blue-400 mt-6 text-white py-3 text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
+            <button v-else @click="goToNextQuestion()"  class="bg-blue-400 mt-6 text-white py-2 lg:py-3 text-md lg:text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
                 DALEJ
             </button>
         </div>
@@ -65,11 +67,11 @@ const nextQuestion = computed(() => {
 })
 
 const checkAnswer = (event) => {
-    if(event.target.classList.contains('border-gray-800')){
+    if(event.target.classList.contains('border-stone-800')){
         isDisabled.value = !isDisabled.value
-        event.target.classList.remove('border-gray-800')
+        event.target.classList.remove('border-stone-800')
     }else{
-        event.target.classList.add('border-gray-800')
+        event.target.classList.add('border-stone-800')
         isDisabled.value = !isDisabled.value
     }
     
@@ -147,6 +149,8 @@ useHead({
     left: 0;
     width: 100%; height: 100%;
     background-image: v-bind(questionImg);
+    background-size: cover;
+    background-position: center center;
     filter: opacity(40%);
 }
 
