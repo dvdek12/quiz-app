@@ -143,9 +143,32 @@ const data = {
                             content: 'zajarałbym bucha'
                         }
                     ]
-                }
+                },
+                {
+                    question: 'Czwarte testowe pytanie?',
+                    img: "https://imgs.search.brave.com/LAHSvazLdXOI1MHSclK_yBXyoUJfgpBZhblUhlrYTWU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/ODkxNDA5MTU3MDgt/MjBmZjU4NmZlNzY3/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4Tm54OGQy/VmxaSHhsYm53d2ZI/d3dmSHg4TUE9PQ",
+                    answers: [
+                        {
+                            correct: false,
+                            content: 'Buszek'
+                        },
+                        {
+                            correct: false,
+                            content: 'Nauka'
+                        },
+                        {
+                            correct: false,
+                            content: 'Dziewczynki'
+                        },
+                        {
+                            correct: true,
+                            content: 'Dziewczynki i Buszek <3'
+                        }
+                    ]
+                },
             ]
-        }
+        },
+        
     ]
 }
 

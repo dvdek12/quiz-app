@@ -1,7 +1,7 @@
 import data from '~/quizData.js'
 
 export default async (name: any) => {
-    const quiz = ref(data.quizzes.find(({ quizName }) => quizName === "Stasiubizm"))
+    const quiz = ref(data.quizzes.find(({ quizName }) => quizName === name))
     
     return quiz
 }

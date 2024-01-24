@@ -15,7 +15,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-1 sm:grid-rows-2 gap-4">
                 <button @click="checkAnswer($event)" 
-                    v-for="answer in question.answers" :key="answer" 
+                    v-for="answer in question.answers" :key="answer.content" 
                     class="bg-gray-200 hover:bg-gray-300 text-md sm:text-lg lg:text-2xl 
                     transition-all duration-100 ease-in-out  p-3 sm:p-4 lg:p-7 text-center border-4
                     "
@@ -53,7 +53,7 @@ const animateShake = ref(false)
 const isDisabled = ref(false)
 
 const question = computed(() => quiz.value.questions.find(q => q.question == params.question + '?'))
-
+console.log(question.value);
 const questionImg = computed(() => `url(${question.value.img})`)
 
 const questionIndex = computed(() => quiz.value.questions.findIndex(q => q.question == params.question + '?'))
