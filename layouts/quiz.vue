@@ -6,7 +6,7 @@
             </h2>
         </div>
 
-        <div class="w-full sm:w-3/4 lg:w-1/2 ">
+        <div class="w-full sm:w-3/4 lg:w-1/2 px-6">
             <slot/>
         </div>
     </div>
