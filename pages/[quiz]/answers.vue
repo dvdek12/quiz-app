@@ -3,7 +3,7 @@
 
         <div class="flex items-center sm:justify-center  bg-gray-100 " >
             <table class="table-fixed select-none border-separate ">
-                <thead class="hidden sm:block">
+                <thead class="">
                     <tr class="flex flex-col mb-4 sm:table-row bg-blue-200">
                         <th class=""> Nr. </th>
                         <th class="text-start px-6"> Treść pytania </th>
