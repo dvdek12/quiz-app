@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-20 lg:py-24 space-y-16 mt-24 ">
+    <div class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-20 lg:py-24 space-y-16  ">
 
-        <div class="flex items-center sm:justify-center  bg-gray-100 translate-y-64" >
+        <div class="flex items-center sm:justify-center  bg-gray-100 " >
             <table class="table-fixed select-none border-separate ">
                 <thead class="hidden sm:block">
                     <tr class="flex flex-col mb-4 sm:table-row bg-blue-200">
