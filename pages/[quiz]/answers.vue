@@ -1,10 +1,10 @@
 <template>
-    <div class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-20 lg:py-24 space-y-16">
+    <div class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-20 lg:py-24 space-y-16 mt-24 ">
 
-        <div class="overflow-auto" >
-            <table class="table-auto select-none ">
-                <thead>
-                    <tr>
+        <div class="flex items-center sm:justify-center  bg-gray-100 translate-y-64" >
+            <table class="table-fixed select-none border-separate ">
+                <thead class="hidden sm:block">
+                    <tr class="flex flex-col mb-4 sm:table-row bg-blue-200">
                         <th class=""> Nr. </th>
                         <th class="text-start px-6"> Treść pytania </th>
                         <th class="px-6"> Twoja odp. </th>
@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(q, index) in tableData" :key="q" class="text-md lg:text-lg font-semibold text-gray-400 hover:text-blue-600 ">
+                    <tr v-for="(q, index) in tableData" :key="q" class="mb-4 text-md lg:text-lg font-semibold text-gray-400 hover:text-blue-600 flex flex-col  sm:table-row">
                         <td class="px-6">
                             {{ index + 1 }} 
                         </td>
