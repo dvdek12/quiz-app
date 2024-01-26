@@ -53,18 +53,22 @@ const animateShake = ref(false)
 const isDisabled = ref(false)
 
 const question = computed(() => quiz.value.questions.find(q => q.question == params.question + '?'))
-console.log(question.value);
+
 const questionImg = computed(() => `url(${question.value.img})`)
 
 const questionIndex = computed(() => quiz.value.questions.findIndex(q => q.question == params.question + '?'))
 
 const nextQuestion = computed(() => {
+    console.log(quiz.value.questions);
+    console.log("next question from computed-> ", quiz.value.questions[questionIndex.value + 1]);
     if (questionIndex.value + 1 >= quizLength.value) {
         return quiz.value.questions[questionIndex.value]
     } else {
         return quiz.value.questions[questionIndex.value + 1]
     }
 })
+console.log(question.value);
+console.log(nextQuestion.value);
 
 const checkAnswer = (event) => {
     if(event.target.classList.contains('border-stone-800')){
