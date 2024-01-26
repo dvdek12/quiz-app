@@ -1,5 +1,5 @@
 <template>
-    <div class="w-screen h-screen bg-gray-700 flex flex-col items-center justify-evenly ">
+    <div class="w-screen min-h-screen bg-gray-700 flex flex-col items-center justify-evenly space-y-6 overflow-x-hidden">
         <div class="bg-blue-400 py-3 px-6 mt-2 w-1/2 md:w-1/4 rounded-lg">
             <h2 class="text-center text-2xl md:text-4xl font-semibold text-white">
                 QUIZ
