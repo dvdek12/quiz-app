@@ -70,8 +70,7 @@ const tableData = computed(() => {
 
 
 
-console.log(quiz.value);
-console.log(tableData.value);
+
 
 
 definePageMeta({

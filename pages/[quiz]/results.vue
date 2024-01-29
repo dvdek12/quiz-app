@@ -40,41 +40,13 @@
 
 
         <nav class="grid grid-rows-4 grid-flow-row sm:grid-cols-2 sm:grid-rows-2 lg:grid-flow-col lg:grid-rows-1 gap-3 lg:gap-x-4">
-            <NuxtLink to="/">
-                <button class="inline-flex items-center space-x-2 bg-blue-400 px-4 py-2 rounded-md w-full lg:w-auto">
-                    <Icon name="fa6-solid:house" color="white" size="16" />
-                    <span class="text-white  text-md">
-                        Menu
-                    </span>
-                </button>
-            </NuxtLink>
+            <QuizMenuButton to="/" icon="fa6-solid:house" content="Menu" color="bg-blue-400"/>
 
-            <NuxtLink :to="`/${quiz.quizName}/${quiz.questions[0].question}`">
-                <button class="inline-flex items-center space-x-2 bg-orange-400 px-4 py-2 rounded-md w-full lg:w-auto">
-                    <Icon name="mi:repeat" color="white" size="16" />
-                    <span class="text-white  text-md">
-                        Powtórz
-                    </span>
-                </button>
-            </NuxtLink>
+            <QuizMenuButton :to="`/${quiz.quizName}/${quiz.questions[0].question}`" icon="mi:repeat" content="Powtórz" color="bg-orange-400"/>
 
-            <NuxtLink :to="`/${quiz.quizName}/answers`">
-                <button class="inline-flex items-center space-x-2 bg-indigo-400 px-4 py-2 rounded-md w-full lg:w-auto">
-                <Icon name="lets-icons:chart-fill" color="white" size="16" />
-                <span class="text-white  text-md">
-                    Odpowiedzi
-                </span>
-            </button>
-            </NuxtLink>
+            <QuizMenuButton :to="`/${quiz.quizName}/answers`" icon="lets-icons:chart-fill" content="Odpowiedzi" color="bg-indigo-400"/>
 
-            <NuxtLink :to="`/${nextQuiz.quizName}/${nextQuiz.questions[0].question}`">
-                <button class="inline-flex items-center space-x-2 bg-green-400 px-4 py-2 rounded-md w-full lg:w-auto">
-                    <Icon name="icon-park-solid:next" color="white" size="16" />
-                    <span class="text-white  text-md">
-                        Następny quiz
-                    </span>
-                </button>
-            </NuxtLink>
+            <QuizMenuButton :to="`/${nextQuiz.quizName}/${nextQuiz.questions[0].question}`" icon="icon-park-solid:next" content="Następny quiz" color="bg-green-400"/>
         </nav>
     </div>
 </template>
@@ -102,7 +74,7 @@ const answers = computed(() => getData('answers'))
 
 const score = useState('score', () => 0)
 
-const scoreWithPercentages = computed(() => (score.value / quizLength.value).toFixed(2) * 100)
+
 
 
 const correctAnswers = computed(() => {
