@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex flex-col items-center bg-center bg-cover w-full shadow-2xl filter " >
+    <div class="relative flex flex-col items-center bg-center bg-cover w-full shadow-2xl filter ">
         <div class="flex flex-col space-y-3 w-full items-center  relative">
             <QuizProgressLine :current="questionIndex + 1" :max="quizLength" />
             <span class="font-bold uppercase text-white text-lg lg:text-2xl">
@@ -14,23 +14,21 @@
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-1 sm:grid-rows-2 gap-4">
-                <button @click="checkAnswer($event)" 
-                    v-for="answer in question.answers" :key="answer.content" 
-                    class="bg-gray-200 hover:bg-gray-300 text-md sm:text-lg lg:text-2xl 
+                <button @click="checkAnswer($event)" v-for="answer in question.answers" :key="answer.content" class="bg-gray-200 hover:bg-gray-300 text-md sm:text-lg lg:text-2xl 
                     transition-all duration-100 ease-in-out  p-3 sm:p-4 lg:p-7 text-center border-4
-                    "
-                    :class="{ shakeAnimation : animateShake }"
-                    :disabled="isDisabled && answer.content !== checkedAnswer"
-                    >
+                    " :class="{ shakeAnimation: animateShake }"
+                    :disabled="isDisabled && answer.content !== checkedAnswer">
                     {{ answer.content }}
                 </button>
             </div>
 
-            <button v-if="(questionIndex + 1) === quizLength" @click="showResults()"  class="bg-blue-400 mt-6 text-white py-2 lg:py-3 text-md lg:text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
+            <button v-if="(questionIndex + 1) === quizLength" @click="showResults()"
+                class="bg-blue-400 mt-6 text-white py-2 lg:py-3 text-md lg:text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
                 ZAKOŃCZ
             </button>
 
-            <button v-else @click="goToNextQuestion()"  class="bg-blue-400 mt-6 text-white py-2 lg:py-3 text-md lg:text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
+            <button v-else @click="goToNextQuestion()"
+                class="bg-blue-400 mt-6 text-white py-2 lg:py-3 text-md lg:text-xl font-semibold shadow-xl hover:bg-blue-500 transition-all duration-300 ease-in-out">
                 DALEJ
             </button>
         </div>
@@ -67,32 +65,31 @@ const nextQuestion = computed(() => {
         return quiz.value.questions[questionIndex.value + 1]
     }
 })
-console.log(question.value);
-console.log(nextQuestion.value);
+
 
 const checkAnswer = (event) => {
-    if(event.target.classList.contains('border-stone-800')){
+    if (event.target.classList.contains('border-stone-800')) {
         isDisabled.value = !isDisabled.value
         event.target.classList.remove('border-stone-800')
-    }else{
+    } else {
         event.target.classList.add('border-stone-800')
         isDisabled.value = !isDisabled.value
     }
-    
+
     checkedAnswer.value = event.target.innerText
 }
 
 const goToNextQuestion = () => {
-    if(checkedAnswer.value === ""){
+    if (checkedAnswer.value === "") {
         animateShake.value = true
 
         setTimeout(() => {
             animateShake.value = false
         }, 1500)
-    }else{
+    } else {
         saveAnswerInStorage()
 
-        navigateTo({ path: `/${quiz.value.quizName}/${nextQuestion.value.question}` })
+        navigateTo({ path: `/${quiz.value.name}/${nextQuestion.value.question}` })
     }
 }
 
@@ -102,56 +99,54 @@ const saveAnswerInStorage = () => {
     currentAnswers.value.push(checkedAnswer.value)
 
     setData('answers', currentAnswers.value)
-    
+
 }
 
 const showResults = () => {
-    if(checkedAnswer.value === ""){
+    if (checkedAnswer.value === "") {
         animateShake.value = true
 
         setTimeout(() => {
             animateShake.value = false
         }, 1500)
-    }else{
+    } else {
         saveAnswerInStorage()
         setData('endQuiz', true)
-        navigateTo({ path: `/${quiz.value.quizName}/results` })
+        navigateTo({ path: `/${quiz.value.name}/results` })
     }
 }
 
 onMounted(() => {
-    if((params.question + "?") === quiz.value.questions[0].question){
+    if ((params.question + "?") === quiz.value.questions[0].question) {
         setData('answers', [])
     }
 })
 
 definePageMeta({
-  layout: 'quiz'
+    layout: 'quiz'
 })
 
 useHead({
-    title: `${quiz.value.quizName} - ${question.value.question}`
+    title: `${quiz.value.name} - ${question.value.question}`
 })
 
 </script>
 
 <style scoped>
-
-.salsa{
+.salsa {
     font-family: 'Salsa';
 }
 
-.filter{
+.filter {}
 
-}
-
-.filter::before{
+.filter::before {
     content: "";
     position: absolute;
     background-size: cover;
     top: 0;
     left: 0;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     background-image: v-bind(questionImg);
     background-size: cover;
     background-position: center center;
@@ -160,28 +155,33 @@ useHead({
 
 
 .shakeAnimation {
-  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 @keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
 
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
 
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }
-
 </style>

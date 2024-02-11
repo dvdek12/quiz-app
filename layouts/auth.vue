@@ -22,24 +22,8 @@
             </div>
         </div>
 
-        <div class="w-2/3 h-full bg-wenge flex flex-col justify-center items-center">
-            <form class="flex flex-col">
-                <h2 class="text-isabelline text-5xl mb-12">Zaloguj się</h2>
-
-                <div class="flex flex-col space-y-2">
-                    <span>
-                        Email
-                    </span>
-                    <input type="email">
-                </div>
-
-                <div class="flex flex-col space-y-2">
-                    <span>
-                        Hasło
-                    </span>
-                    <input type="password">
-                </div>
-            </form>
+        <div class="w-2/3 h-full bg-isabelline flex flex-col justify-center items-center">
+            <slot />
         </div>
     </div>
 </template>

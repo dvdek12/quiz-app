@@ -1,5 +1,6 @@
 <template>
-    <div class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-20 lg:py-24 space-y-16 lg:px-0 px-6">
+    <div
+        class="flex flex-col items-center justify-evenly bg-white w-full shadow-2xl py-20 lg:py-24 space-y-16 lg:px-0 px-6">
 
         <div class="flex flex-col space-y-4 items-center">
             <div class="">
@@ -7,7 +8,7 @@
                 <img v-else :src="sadIcon" alt="sadIcon" class="w-16 h-16 lg:w-24 lg:h-24">
             </div>
 
-            <h2 v-if="score > 1"  class="text-3xl md:text-4xl lg:text-5xl chivo font-semibold text-gray-800">
+            <h2 v-if="score > 1" class="text-3xl md:text-4xl lg:text-5xl chivo font-semibold text-gray-800">
                 Gratulacje!
             </h2>
             <h2 v-else class="text-3xl md:text-4xl lg:text-5xl chivo font-semibold text-gray-800 text-center">
@@ -39,14 +40,18 @@
         </div>
 
 
-        <nav class="grid grid-rows-4 grid-flow-row sm:grid-cols-2 sm:grid-rows-2 lg:grid-flow-col lg:grid-rows-1 gap-3 lg:gap-x-4">
-            <QuizMenuButton to="/" icon="fa6-solid:house" content="Menu" color="bg-blue-400"/>
+        <nav
+            class="grid grid-rows-4 grid-flow-row sm:grid-cols-2 sm:grid-rows-2 lg:grid-flow-col lg:grid-rows-1 gap-3 lg:gap-x-4">
+            <QuizMenuButton to="/" icon="fa6-solid:house" content="Menu" color="bg-blue-400" />
 
-            <QuizMenuButton :to="`/${quiz.quizName}/${quiz.questions[0].question}`" icon="mi:repeat" content="Powtórz" color="bg-orange-400"/>
+            <QuizMenuButton :to="`/${quiz.name}/${quiz.questions[0].question}`" icon="mi:repeat" content="Powtórz"
+                color="bg-orange-400" />
 
-            <QuizMenuButton :to="`/${quiz.quizName}/answers`" icon="lets-icons:chart-fill" content="Odpowiedzi" color="bg-indigo-400"/>
+            <QuizMenuButton :to="`/${quiz.name}/answers`" icon="lets-icons:chart-fill" content="Odpowiedzi"
+                color="bg-indigo-400" />
 
-            <QuizMenuButton :to="`/${nextQuiz.quizName}/${nextQuiz.questions[0].question}`" icon="icon-park-solid:next" content="Następny quiz" color="bg-green-400"/>
+            <QuizMenuButton :to="`/${nextQuiz.name}/${nextQuiz.questions[0].question}`" icon="icon-park-solid:next"
+                content="Następny quiz" color="bg-green-400" />
         </nav>
     </div>
 </template>
@@ -59,11 +64,11 @@ import sadIcon from '~/assets/sad.png'
 const { params } = useRoute()
 const quizzes = await useQuizzes()
 
-const quiz = computed(() => quizzes.value.find(q => q.quizName === params.quiz))
+const quiz = computed(() => quizzes.value.find(q => q.name === params.quiz))
 const quizLength = computed(() => quiz.value.questions.length)
 const nextQuiz = computed(() => {
-    let nextIndex = quizzes.value.findIndex(q => q.quizName === quiz.value.quizName) + 1
-    if(nextIndex >= quizzes.value.length){
+    let nextIndex = quizzes.value.findIndex(q => q.name === quiz.value.name) + 1
+    if (nextIndex >= quizzes.value.length) {
         nextIndex = 0
     }
     return quizzes.value[nextIndex]
@@ -113,14 +118,12 @@ definePageMeta({
 })
 
 useHead({
-    title: `${quiz.value.quizName} - wyniki`
+    title: `${quiz.value.name} - wyniki`
 })
 
 </script>
 
-<style scoped>
-.chivo {
+<style scoped>.chivo {
     font-family: 'Chivo', sans-serif;
     ;
-}
-</style>
+}</style>
