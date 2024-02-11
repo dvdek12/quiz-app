@@ -1,7 +1,7 @@
-import data from '~/quizData.js'
+const quizzes = await useQuizzes();
 
-export default async (name: any) => {
-    const quiz = ref(data.quizzes.find(({ quizName }) => quizName === name))
-    
-    return quiz
-}
+export default async (_name: any) => {
+  const quiz = ref(quizzes.value?.find(({ name }) => name === _name));
+
+  return quiz;
+};

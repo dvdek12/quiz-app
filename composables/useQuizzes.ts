@@ -1,3 +1,5 @@
-import data from '~/quizData.js'
+const supabase = useSupabaseClient();
 
-export default async () => useState('quiz', () => data.quizzes)
+const { data: quizzes } = await supabase.from("quizzes").select();
+
+export default async () => useState("quizzes", () => quizzes);
