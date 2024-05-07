@@ -8,21 +8,23 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form class="space-y-6" @submit.prevent="signUpNewUser()">
                 <div>
-                    <label for="email" class="block text-lg font-medium leading-6 text-cordovan/80">Email address</label>
+                    <label for="email" class="block text-lg font-medium leading-6 text-cordovan/80">Email
+                        address</label>
                     <div class="mt-2">
                         <input id="email" v-model="email" name="email" type="email" autocomplete="email" required
-                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-cordovan sm:text-md sm:leading-6 transition-all duration-300 ease-in-out">
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-cordovan sm:text-md sm:leading-6 transition-all duration-300 ease-in-out">
                     </div>
                 </div>
 
                 <div>
                     <div class="flex items-center justify-between">
-                        <label for="password" class="block text-lg font-medium leading-6 text-cordovan/80">Password</label>
+                        <label for="password"
+                            class="block text-lg font-medium leading-6 text-cordovan/80">Password</label>
                     </div>
                     <div class="mt-2">
                         <input id="password" v-model="password" name="password" type="password"
                             autocomplete="current-password" required
-                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-cordovan sm:text-md sm:leading-6 transition-all duration-300 ease-in-out">
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-cordovan sm:text-md sm:leading-6 transition-all duration-300 ease-in-out">
                     </div>
                 </div>
 
@@ -34,7 +36,7 @@
                     <div class="mt-2">
                         <input id="password" v-model="password2" name="password" type="password"
                             autocomplete="current-password" required
-                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-cordovan sm:text-md sm:leading-6 transition-all duration-300 ease-in-out">
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-cordovan sm:text-md sm:leading-6 transition-all duration-300 ease-in-out">
                     </div>
                 </div>
 
@@ -89,10 +91,17 @@ const errorMsg = ref(null)
 const successMsg = ref(null)
 
 async function signUpNewUser() {
+    console.log(email.value, password.value);
     try {
         const { data, error } = await supabase.auth.signUp({
             email: email.value,
             password: password.value,
+            // options: {
+            //     data: {
+            //         background_cover_name: 'bg1.jpg',
+            //         avatar_url: ''
+            //     }
+            // }
         });
 
         console.log(data);
@@ -104,18 +113,15 @@ async function signUpNewUser() {
     } catch (e) {
         errorMsg.value = e.message
     }
-    // const { data, error } = await supabase.auth.signUp({
-    //     email: email.value,
-    //     password: password.value,
-    //     options: {
-    //         emailRedirectTo: 'http://localhost:3000/'
-    //     }
-    // })
-
-    // if (error) throw error
-
-    // console.log(data);
 }
+
+const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    console.log(event, session)
+
+    if (event === 'INITIAL_SESSION') {
+        console.log('zalogowano');
+    }
+})
 
 definePageMeta({
     layout: 'auth'

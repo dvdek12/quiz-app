@@ -2,10 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    "@nuxtjs/tailwindcss",
+    // "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
-    "nuxt-icon",
+    // "nuxt-icon",
     "@nuxtjs/supabase",
+    "@nuxt/ui",
   ],
 
   supabase: {
